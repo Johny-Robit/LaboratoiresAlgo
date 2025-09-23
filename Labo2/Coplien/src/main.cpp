@@ -1,5 +1,5 @@
 /*
- * testPersonne.cpp
+* testPersonne.cpp
  *
  *      Author: T.E.
  */
@@ -47,7 +47,7 @@ main ()
       v_personnes.push_back (move (lui));
     }
     autre = move (moi);
-//    cout << "moi : " << moi; //Segmentation fault
+    //    cout << "moi : " << moi; //Segmentation fault
   }
   cout << v_personnes[0];
   cout << autre;
