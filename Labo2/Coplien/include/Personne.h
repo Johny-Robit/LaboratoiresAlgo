@@ -23,7 +23,9 @@ public:
   const std::string& reqNom () const;
   const std::string& reqPrenom () const;
   const Adresse& reqAdresse () const;
+
   void asgAdresse (const Adresse& p_adresse);
+
   std::string reqPersonneFormate ()const;
 
   friend std::ostream& operator<< (std::ostream& os, const Personne& p_personne);

@@ -9,16 +9,23 @@
 
 #include <string>
 
-class Adresse
-{
+class Adresse {
 public:
   Adresse () = delete; //C++11
+
+  // Coplien
+  // constructeur par copie
   Adresse (const std::string& p_adresse);
+  // Operateur d'affectation
+  Adresse& operator= (const Adresse& p_adresse);
+  // Destructeur
+  ~Adresse();
+
   void asgAdresse (const std::string& adresse);
   const std::string& reqDetailAdresse () const;
 
 private:
-  std::string m_detailAdresse;
+  std::string* m_detailAdresse;
 
   void verifieInvariant () const;
 };
