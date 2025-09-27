@@ -14,7 +14,7 @@ TEST(File, constructeur_liste_noexcept) {
 }
 
 TEST(File, constructeur_cap_depasse_cap_max_throw) {
-    EXPECT_THROW(td4::File<int> maFile (td4::File<int>::cap_maximal + 1), std::invalid_argument) ;
+    EXPECT_THROW(td4::File<int> maFile (td4::File<int>::cap_maximum + 1), std::invalid_argument) ;
 }
 
 // Fixtures de test
@@ -126,7 +126,7 @@ EXPECT_TRUE(file_5.estVide());
 
 TEST_F(FileTest, agrandir_augmente_la_capacite_liste_vide){
 file_vide.agrandir(2*td4::File<int>::cap_defaut);
-EXPECT_EQ(2*td4::File<int>::cap_defaut);, file_vide.disponible());
+EXPECT_EQ((2*td4::File<int>::cap_defaut), file_vide.disponible());
 }
 
 TEST_F(FileTest, agrandir_augmente_la_capacite_liste_5){

@@ -5,6 +5,8 @@
 #ifndef FILE_EXEC_FILE_IMPLANTATION_H
 #define FILE_EXEC_FILE_IMPLANTATION_H
 
+#include <stdexcept>
+
 #include "File.h"
 
 namespace td4 {
@@ -16,8 +18,9 @@ namespace td4 {
  */
     template<typename T>
     File<T>::File(size_t capacite) : capacite(capacite), cardinal(0), tete(0), vecteur(capacite) {
-    if (capacite > cap_maximal) {
-        throw std::invalid_argument("Capacité dépasse la capacité maximale.");
+        if (capacite > cap_maximum) {
+            throw std::invalid_argument("Capacité dépasse la capacité maximale.");
+        }
     }
 
 /**
@@ -29,9 +32,10 @@ namespace td4 {
  */
     template<typename T>
     File<T>::File(std::initializer_list<T> l) : capacite(2*l.size()), cardinal(l.size()), tete(0), vecteur(l) {
-    if (capacite > cap_maximal) {
-        throw std::invalid_argument("Capacité dépasse la capacité maximale.");
-    vecteur.resize(capacite);
+        if (capacite > cap_maximum) {
+            throw std::invalid_argument("Capacité dépasse la capacité maximale.");
+            vecteur.resize(capacite);
+        }
     }
 
 /**
@@ -42,10 +46,11 @@ namespace td4 {
  */
     template<typename T>
     void File<T>::enfiler(const T &e) {
-    if (estPleine()) {
-        throw std::runtime_error("La file est pleine.");
-        vecteur.at(queue()) = e;
-        cardinal++;
+        if (estPleine()) {
+            throw std::runtime_error("La file est pleine.");
+            vecteur.at(queue()) = e;
+            cardinal++;
+        }
     }
 
 /**
@@ -55,8 +60,9 @@ namespace td4 {
  */
     template<typename T>
     void File<T>::defiler() {
-    if (estVide()) throw std::runtime_error("La file est vide.");
-
+        if (estVide()) {
+            throw std::runtime_error("La file est vide.");
+        }
         tete = (tete + 1) % capacite;
         cardinal--;
 
@@ -70,7 +76,9 @@ namespace td4 {
  */
     template<typename T>
     const T &File<T>::premier() const {
-        if (estVide()) throw std::runtime_error("La file est vide.");
+        if (estVide()) {
+            throw std::runtime_error("La file est vide.");
+        }
         return vecteur.at(tete);
     }
 
@@ -91,9 +99,8 @@ namespace td4 {
  */
     template<typename T>
     void File<T>::vider() {
-    tete = 0;
-    cardinal = 0;
-
+        tete = 0;
+        cardinal = 0;
     }
 
 /**
@@ -104,9 +111,8 @@ namespace td4 {
  */
     template<typename T>
     void File<T>::agrandir(size_t x) {
-    vecteur.resize(x);
-    capacite = x;
-
+        vecteur.resize(x);
+        capacite = x;
     }
 
 /**
