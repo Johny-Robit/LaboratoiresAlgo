@@ -34,8 +34,8 @@ namespace td4 {
     File<T>::File(std::initializer_list<T> l) : capacite(2*l.size()), cardinal(l.size()), tete(0), vecteur(l) {
         if (capacite > cap_maximum) {
             throw std::invalid_argument("Capacité dépasse la capacité maximale.");
-            vecteur.resize(capacite);
         }
+        vecteur.resize(capacite);
     }
 
 /**
@@ -48,9 +48,9 @@ namespace td4 {
     void File<T>::enfiler(const T &e) {
         if (estPleine()) {
             throw std::runtime_error("La file est pleine.");
-            vecteur.at(queue()) = e;
-            cardinal++;
         }
+        vecteur.at(queue()) = e;
+        cardinal++;
     }
 
 /**

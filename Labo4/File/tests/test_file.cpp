@@ -94,9 +94,7 @@ TEST_F(FileTest, enfiler_defiler_bonne_sequence) {
     EXPECT_TRUE(file_5.estVide());
 }
 
-TEST_F(FileTest, ENFILER_DEFILER_WRAPAROUND){
-
-// pas sur de compnredre l'exemple... le test passera probablement pas
+TEST_F(FileTest, enfiler_defiler_wraparound){
     file_2.enfiler(3);
     EXPECT_EQ(1,file_2.premier());
     file_2.defiler();
@@ -106,17 +104,16 @@ TEST_F(FileTest, ENFILER_DEFILER_WRAPAROUND){
     file_2.defiler();
 
     file_2.enfiler(5);
-    EXPECT_EQ(1,file_2.premier());
+    EXPECT_EQ(3,file_2.premier());
     file_2.defiler();
 
-    file_2.enfiler(3);
-    EXPECT_EQ(1,file_2.premier());
+    file_2.enfiler(6);
+    EXPECT_EQ(4,file_2.premier());
     file_2.defiler();
 
-    file_2.enfiler(3);
-    EXPECT_EQ(1,file_2.premier());
+    file_2.enfiler(7);
+    EXPECT_EQ(5,file_2.premier());
     file_2.defiler();
-
 }
 
 TEST_F(FileTest, vider_file_est_vide){
