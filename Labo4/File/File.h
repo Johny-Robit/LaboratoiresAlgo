@@ -44,8 +44,6 @@ namespace td4 {
         size_t tete;
         std::vector<T> vecteur;
 
-    private:
-
         size_t queue() const;
 
 

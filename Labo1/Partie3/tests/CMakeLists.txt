@@ -1,7 +1,7 @@
 # Crée une bibliothèque statique
 add_library(test_tugabudoire STATIC test_tugabudoire.cpp)
 
-# Rend le répertoire ici accessible aux fichiers qui utilisent cette bibliothèque
+# Indique où sont les fichiers sources (headers) nécessaire pour compiler la bibliothèque de test
 target_include_directories(test_tugabudoire PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Force l'utilisation du standard C++14
