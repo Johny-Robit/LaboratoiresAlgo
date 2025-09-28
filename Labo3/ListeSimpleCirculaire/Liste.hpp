@@ -2,6 +2,7 @@
 #define LISTE_HPP
 
 #include "Liste.h"
+#include "ContratException.h"
 
 
 #endif //LISTE_HPP

@@ -9,3 +9,5 @@ cmake-build-*/
 # OS-specific
 .DS_Store
 Thumbs.db
+
+html/

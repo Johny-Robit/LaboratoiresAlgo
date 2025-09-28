@@ -1,14 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
-
 project(ListeSimpleCirculaire LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(TEST_SOURCES
-        ${PROJECT_SOURCE_DIR}/ListeTesteur.cpp
-        ${PROJECT_SOURCE_DIR}/ContratException.cpp
-)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -18,18 +12,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-enable_testing() # rends les cibles gtest et gtest_main disponibles
-
-add_executable(listeCirculaire_tests ${TEST_SOURCES})
-
-target_link_libraries(
-        listeCirculaire_tests
-        gtest_main
-        gtest
-        pthread
+add_library(
+        ListeSimpleCirculaireLib
+        Liste.hpp
+        Liste.h
+        ContratException.cpp
+        ContratException.h
 )
 
-include(CTest)
+add_executable(ListeTesteur ListeTesteur.cpp)
+
+target_link_libraries(ListeTesteur
+        ListeSimpleCirculaireLib
+        gtest_main
+)
+
+enable_testing()
 include(GoogleTest)
-gtest_discover_tests(listeCirculaire_tests)
+gtest_discover_tests(ListeTesteur)
 
