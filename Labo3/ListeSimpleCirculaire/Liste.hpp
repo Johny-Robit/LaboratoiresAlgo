@@ -27,23 +27,26 @@ namespace lab03 {
      *\brief Destruction profonde de la liste
      *\post La liste est détruite
      */
-   template<typename T>
-   void Liste<T>::_detruire() {
-       if(m_dernier != nullptr) {
-        elem sentinelle = m_dernier->m_suivant;
-        elem remover = sentinelle;
-        while (sentinelle != m_dernier) {
-         sentinelle = sentinelle->m_suivant;
-         remover->m_suivant = nullptr;
-         delete remover;
-         remover = sentinelle;
-        }
-        m_dernier->m_suivant = nullptr;
-        delete m_dernier;
-       }
-       m_dernier = nullptr;
-       m_cardinalite = 0;
+ template<typename T>
+ void Liste<T>::_detruire() {
+     if(m_dernier != nullptr) {
+      elem sentinelle = m_dernier->m_suivant;
+      elem remover = sentinelle;
+      while (sentinelle != m_dernier) {
+       sentinelle = sentinelle->m_suivant;
+       remover->m_suivant = nullptr;
+       delete remover;
+       remover = sentinelle;
       }
+      m_dernier->m_suivant = nullptr;
+      delete m_dernier;
+     }
+     m_dernier = nullptr;
+     m_cardinalite = 0;
+    }
+
+
+
  /**
   *\brief Constructeur de copie
   *\pre Il faut qu'il y ait suffisamment de mémoire
