@@ -307,6 +307,54 @@ namespace lab03 {
      delete sentinelle;
     }
 
+/**
+ *\brief Retourne un pointeur sur le noeud à la position demandé
+ *\param[in] p_position La position demandée
+ *\return Pointeur sur le noeud à la position demandé
+ */
+ template<typename T>
+ typename Liste<T>::elem Liste<T>::_pointeurSurNoeud(const int & p_position) const {
+     elem sentinelle = m_dernier->m_suivant;
+     for (int i=1; i<p_position; ++i) {
+      sentinelle = sentinelle->m_suivant;
+     }
+     return sentinelle;
+    }
+
+/**
+ *\brief Copie profonde d'une liste source
+ *\post La liste est copiée
+ */
+ template<typename T>
+ void Liste<T>::_copier(elem p_dernier) {
+     try {
+      m_dernier = new Noeud(p_dernier->m_el);
+      m_dernier->m_suivant = m_dernier;
+      m_cardinalite = 1;
+      elem sentinelleSurThis = m_dernier;
+      for (elem sentinelleSurSource = p_dernier->m_suivant;
+           sentinelleSurSource != p_dernier;
+           sentinelleSurSource = sentinelleSurSource->m_suivant
+     ) {
+       sentinelleSurThis->m_suivant = new Noeud(sentinelleSurSource->m_el, m_dernier);
+       m_cardinalite++;
+       sentinelleSurThis = sentinelleSurThis->m_suivant;
+      }
+     } catch (const std::exception & e) {
+      _detruire();
+      throw;
+     }
+    }
+
+ /**
+  *\brief vérifier les invariants de la classe
+  *\post La classe est inchangée
+  */
+ template<typename T>
+ void Liste<T>::verifieInvariant() const {
+     INVARIANT(m_cardinalite >= -1);
+    }
+
 
 }
 
