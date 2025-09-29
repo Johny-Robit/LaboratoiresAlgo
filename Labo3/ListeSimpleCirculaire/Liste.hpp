@@ -15,6 +15,21 @@ namespace lab03 {
     }
 
     /**
+    *\brief Constructeur de copie
+    *\pre Il faut qu'il y ait suffisamment de mémoire
+    *\post La liste passée en paramètre est copiée
+    *\param[in] p_source La liste à copier
+    *\exception bad_alloc s'il n'y a pas assez de mémoire
+    */
+    template<typename T>
+    Liste<T>::Liste(const Liste<T> & p_source) {
+     if(!p_source.estVide()) {
+      _copier(p_source.m_dernier);
+     }
+     INVARIANTS();
+    }
+
+    /**
      * \brief Destructeur
      * \post L'instance de Liste est détruite.
      */
@@ -24,6 +39,26 @@ namespace lab03 {
      }
 
     /**
+    * \brief Surcharge de l'opérateur =
+    *
+    * \pre Il y a assez de mémoire pour l'opération
+    * \post La liste passée en paramètre est copiée
+    * @param[in] p_source La liste à copier
+    * \exception bad_alloc si la précondition n'est pas respectée
+    */
+    template<typename T>
+    const Liste<T>& Liste<T>::operator=(const Liste<T>& p_source) {
+        if(this != &p_source) {
+         _detruire();
+         if(!p_source.estVide()) {
+          _copier(p_source.m_dernier);
+         }
+        }
+        // zone de code à vérifier
+        return *this;
+       }
+
+    /**
      *\brief Destruction profonde de la liste
      *\post La liste est détruite
      */
@@ -31,57 +66,16 @@ namespace lab03 {
  void Liste<T>::_detruire() {
      if(m_dernier != nullptr) {
       elem sentinelle = m_dernier->m_suivant;
-      elem remover = sentinelle;
       while (sentinelle != m_dernier) {
+       elem remover = sentinelle;
        sentinelle = sentinelle->m_suivant;
-       remover->m_suivant = nullptr;
        delete remover;
-       remover = sentinelle;
       }
       m_dernier->m_suivant = nullptr;
       delete m_dernier;
      }
      m_dernier = nullptr;
      m_cardinalite = 0;
-    }
-
-
-
- /**
-  *\brief Constructeur de copie
-  *\pre Il faut qu'il y ait suffisamment de mémoire
-  *\post La liste passée en paramètre est copiée
-  *\param[in] p_source La liste à copier
-  *\exception bad_alloc s'il n'y a pas assez de mémoire
-  */
- template<typename T>
- Liste<T>::Liste(const Liste<T> & p_source) {
-
-     if(!p_source.estVide()) {
-      _copier(p_source.m_dernier);
-     }
-     INVARIANTS();
-    }
-
-
- /**
-  * \brief Surcharge de l'opérateur =
-  *
-  * \pre Il y a assez de mémoire pour l'opération
-  * \post La liste passée en paramètre est copiée
-  * @param[in] p_source La liste à copier
-  * \exception bad_alloc si la précondition n'est pas respectée
-  */
- template<typename T>
- const Liste<T>& Liste<T>::operator=(const Liste<T>& p_source) {
-     if(this != &p_source) {
-      _detruire();
-      if(!p_source.estVide()) {
-       _copier(p_source.m_dernier);
-      }
-     }
-     // zone de code à vérifier
-     return *this;
     }
 
 /**
